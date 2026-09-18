@@ -1,0 +1,20 @@
+name: 脚本测试
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    name: Windows 自动测试
+    runs-on: windows-latest
+    steps:
+      - name: 获取源码
+        uses: actions/checkout@v4
+      - name: 使用 Windows PowerShell 5.1 测试
+        shell: powershell
+        run: ./tests/Run.Tests.ps1
+      - name: 使用 PowerShell 7 测试
+        shell: pwsh
+        run: ./tests/Run.Tests.ps1
